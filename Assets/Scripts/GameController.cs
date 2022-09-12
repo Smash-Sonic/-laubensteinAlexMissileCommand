@@ -1,3 +1,11 @@
+/*****************************************************************************
+// File Name :         GameController.cs
+// Author :            Alex Laubenstein
+// Creation Date :     September 11, 2022
+//
+// Brief Description : This is a script handles endgame conditions and spawns
+                       enemy bullets.
+*****************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +25,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (houseCount == 0)
+        if (houseCount == 0)//no houses=reset
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }
@@ -33,7 +41,7 @@ public class GameController : MonoBehaviour
     }
     void Spawn()
     {
-        int random = Random.Range(1, 7);
+        int random = Random.Range(1, 7);//sets rng for different houses
         //sets spawn position
         Vector3 spawnPos = new Vector3();
         spawnPos.x = (Random.Range(-8.5f, 8.5f));
@@ -43,13 +51,13 @@ public class GameController : MonoBehaviour
         {
             if (random == 1)
             {
-                if (GameObject.Find("house1") == null)
+                if (GameObject.Find("house1") == null)//checks if the house is already gone
                 {
                     break;
                 }
                 else
                 {
-                    cHouse = GameObject.Find("house1").transform.position;
+                    cHouse = GameObject.Find("house1").transform.position; //sets the aim at the house
                 }
             }
             if (random == 2)
@@ -108,7 +116,7 @@ public class GameController : MonoBehaviour
                 }
             }
             GameObject eShot = Instantiate(eBullet, spawnPos, Quaternion.identity); // spawns in the enemy bullet
-            StartCoroutine(eDirect(eShot, cHouse));
+            StartCoroutine(eDirect(eShot, cHouse));//starts movement
             break;
         }
     }
@@ -117,11 +125,11 @@ public class GameController : MonoBehaviour
     {
         while (eshot.transform.position != tarHouse)
         {
-            if (eshot == null)
+            if (eshot == null)//checks if bullet is destroyed
             {
                 break;
             }
-            else
+            else//moves bullet
             {
                 eshot.transform.position = Vector3.MoveTowards(eshot.transform.position, tarHouse, 25f * Time.deltaTime);
             }

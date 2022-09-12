@@ -1,5 +1,5 @@
 /*****************************************************************************
-// File Name :         Bullet_Behavior.cs
+// File Name :         BulletBehavior.cs
 // Author :            Alex Laubenstein
 // Creation Date :     September 11, 2022
 //
@@ -11,6 +11,7 @@ using UnityEngine;
 
 public class BulletBehavior : MonoBehaviour
 {
+    //declare variables
     public Transform spawnPoint;
     public GameObject bullet;
     public GameObject explosion;
@@ -23,16 +24,16 @@ public class BulletBehavior : MonoBehaviour
 
     void Start()
     {
-        target = new Vector2(0.0f, 0.0f);
-        scaleExplosion = new Vector3(1f, 1f, 1f);
-        cam = Camera.main;
+        target = new Vector2(0.0f, 0.0f); //makes target a zeroed vector 2
+        scaleExplosion = new Vector3(1f, 1f, 1f); //sets the scale for the explosion
+        cam = Camera.main; //cam = cam
     }
     // Update is called once per frame
     void Update()
     {
-        point = cam.ScreenToWorldPoint(Input.mousePosition);
+        point = cam.ScreenToWorldPoint(Input.mousePosition); //sets the point variable to the mouse
         point.z = 0;
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1")) //if fire button is pressed set the target to where the mouse was clicked and spawn the bullet
         {
             atPos = false;
             target = point;
@@ -41,7 +42,7 @@ public class BulletBehavior : MonoBehaviour
         }
     }
 
-    IEnumerator Fire(GameObject shot, Vector3 curTarget)
+    IEnumerator Fire(GameObject shot, Vector3 curTarget) //guides bullet to it's destination and manages explosion
     {
         
         while (shot.transform.position != curTarget)
@@ -51,9 +52,9 @@ public class BulletBehavior : MonoBehaviour
         }
         yield return new WaitForSeconds(.01f);
         Destroy(shot);
-        GameObject explo = Instantiate(explosion, target, Quaternion.identity);
+        GameObject explo = Instantiate(explosion, target, Quaternion.identity); //spawn explosion
         yield return new WaitForSeconds(.1f);
-        explo.transform.localScale += scaleExplosion;
+        explo.transform.localScale += scaleExplosion;//increase
         yield return new WaitForSeconds(.1f);
         explo.transform.localScale += scaleExplosion;
         yield return new WaitForSeconds(.1f);
@@ -68,7 +69,9 @@ public class BulletBehavior : MonoBehaviour
         explo.transform.localScale -= scaleExplosion;
         yield return new WaitForSeconds(.1f);
         explo.transform.localScale -= scaleExplosion;
-        Destroy(explo);
+        yield return new WaitForSeconds(.1f);
+        explo.transform.localScale -= scaleExplosion;//decrease
+        Destroy(explo);//cease
         
         atPos = true;
     }

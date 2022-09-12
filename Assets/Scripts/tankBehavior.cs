@@ -1,14 +1,18 @@
+/*****************************************************************************
+// File Name :         TankBehavior.cs
+// Author :            Alex Laubenstein
+// Creation Date :     September 11, 2022
+//
+// Brief Description : This is a script handles barrel rotation.
+*****************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TankBehavior : MonoBehaviour
 {
-    Vector3 worldPosition;
-
-    // Update is called once per frame
-    
-    void Update()
+    // Update is called once per frame   
+    void Update()//moves the barrel to mouse position
     {
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         difference.Normalize();
