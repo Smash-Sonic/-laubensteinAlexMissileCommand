@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameController gc = GameObject.FindObjectOfType<GameController>();
@@ -23,11 +11,36 @@ public class EnemyBehavior : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (collision.gameObject.name == "house") //slime health decrease and activates hitstop
+        if (collision.gameObject.name == "house1") //slime health decrease and activates hitstop
         {
             Destroy(gameObject);
             gc.houseCount--;
         }
-    }
+        if (collision.gameObject.name == "house2") //slime health decrease and activates hitstop
+        {
+            Destroy(gameObject);
+            gc.houseCount--;
+        }
+        if (collision.gameObject.name == "house3") //slime health decrease and activates hitstop
+        {
+            Destroy(gameObject);
+            gc.houseCount--;
+        }
+        if (collision.gameObject.name == "house4") //slime health decrease and activates hitstop
+        {
+            Destroy(gameObject);
+            gc.houseCount--;
+        }
+        if (collision.gameObject.name == "house5") //slime health decrease and activates hitstop
+        {
+            Destroy(gameObject);
+            gc.houseCount--;
+        }
+        if (collision.gameObject.name == "house6") //slime health decrease and activates hitstop
+        {
+            Destroy(gameObject);
+            gc.houseCount--;
+        }
 
+    }
 }
