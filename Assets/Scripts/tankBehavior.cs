@@ -18,5 +18,6 @@ public class TankBehavior : MonoBehaviour
         difference.Normalize();
         float rotation_z = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, rotation_z + 270);
+        //Hello World
     }
 }
